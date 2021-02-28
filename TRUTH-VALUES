@@ -1,0 +1,41 @@
+fmod TRUTH-VALUES is
+
+********************* SIGNATURE ********************* 
+
+**** Sort Declaration ****
+sort Truth-Value .
+
+**** Operators ****
+op true :				-> Truth-Value [ctor] .
+op false :				-> Truth-Value [ctor] .
+op not_ : Truth-Value			-> Truth-Value [prec 20] .
+op _^_ : Truth-Value Truth-Value	-> Truth-Value [comm assoc prec 30] .
+op _V_ : Truth-Value Truth-Value	-> Truth-Value [comm assoc prec 40] .
+op _=>_ : Truth-Value Truth-Value	-> Truth-Value [prec 50] .
+
+
+********************* EQUATIONAL AXIOMS ********************* 
+
+**** Variables ****
+vars t u :	Truth-Value .
+
+
+**** Operators ****
+*** not_ ***
+eq not true = 	false .
+eq not false = 	true .
+
+*** _^_ ***
+eq t ^ true = 	t .
+eq t ^ false = 	false .
+eq t ^ u = u ^ t .
+
+*** _V_ ***
+eq t V true = 	true .
+eq t V false = 	t .
+eq t V u = 	u V t .
+
+*** _=>_ ***
+eq t => u = 	(not t) V u .
+
+endfm

@@ -1,0 +1,85 @@
+fmod NATURALS is
+
+*********** SIGNATURE **************
+**** SPECIFICATIONS ****
+protecting TRUTH-VALUES .
+
+**** SORTS ****
+sort Natural .
+
+**** OPERATORS ****
+op 0 : -> Natural [ctor].
+op succ _ : Natural -> Natural [ctor].
+
+ops 1 2 3 4 5 6 7 8 9 : -> Natural [ctor].
+
+op _ _ : Natural Natural -> Natural .
+
+op pred _ : Natural	-> Natural .
+op _ < _ : Natural Natural -> Truth-Value .
+op _ > _ : Natural Natural -> Truth-Value .
+op _ is _ : Natural Natural -> Truth-Value .
+op _ + _ : Natural Natural -> Natural [comm assoc prec 35].
+op _ * _ : Natural Natural -> Natural [comm assoc prec 30].
+
+op _ != _ : Natural Natural -> Truth-Value .
+
+op _ / _ : Natural Natural -> Natural .
+op _ ** _ : Natural Natural -> Natural .
+
+************ EQUATIONAL AXIOMS *************
+**** VARIABLES ****
+var n m : Natural .
+
+**** PREDECESSOR OPERATION (pred) ****
+eq pred succ n = n .
+eq pred 0 = 0 .
+
+**** LESS THAN (<) ****
+eq 0 < 0	= false .
+eq 0 < succ n	= true .
+eq succ n < 0	= false .
+eq succ n < succ m = n < m .
+
+**** GREATER THAN (>) ****
+eq n > m	= m < n .
+
+**** EQUALS (is) ****
+eq 0 is 0 	= true .
+eq 0 is succ n	= false .
+eq succ n is succ m = n is m .
+
+**** SUM (+) ****
+eq 0 + n	= n .
+eq (succ n) + m	= succ(n + m) .
+
+**** MULTIPLICATION (*) ****
+eq 0 * n	= 0 .
+eq (succ n) * m	= m + (n * m) .
+
+**** DIFF (!=) ****
+eq n != m	= not (n is m) .
+
+**** DIVISION (/) ****
+eq 0 / n	= 0 .
+eq n / succ 0	= n .
+eq succ n / m = pred n / pred m .
+
+**** POWER (**) ****
+eq n ** 0 = succ 0 .
+eq n ** succ 0 = n .
+eq n ** (succ m) = n * (n ** m) .
+
+**** DECIMALS ****
+eq 1 = succ 0 .
+eq 2 = succ 1 .
+eq 3 = succ 2 .
+eq 4 = succ 3 .
+eq 5 = succ 4 .
+eq 6 = succ 5 .
+eq 7 = succ 6 .
+eq 8 = succ 7 .
+eq 9 = succ 8 .
+
+
+endfm

@@ -1,0 +1,5 @@
+mod EXVARS is
+	protecting TRUTH-VALUES .
+
+	vars t b c d x : Truth-Value .
+endm

@@ -1,0 +1,3 @@
+set protect BOOL off .
+load TRUTH-VALUES .
+load NATURALS .
