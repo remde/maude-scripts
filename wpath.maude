@@ -1,0 +1,11 @@
+fmod WPATH is
+protecting NAT .
+protecting GRAPH .
+protecting PATH .
+subsort Edge < WPath .
+op _ _ : Edge Path -> Path .
+var e : Edge .
+vars p q r s : WPath .
+cmb e p : WPath if target(e) = source(p) .
+ceq (p q) r = p (q r) if target(p) = source(q) /\ target(q) = source(r) .
+endfm

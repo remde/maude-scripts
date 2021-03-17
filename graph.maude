@@ -1,0 +1,18 @@
+fmod GRAPH is
+sorts Node Edge .
+ops n1 n2 n3 n4 n5 n6 : -> Node [ctor] .
+ops a1 a2 a3 a4 a5 a6 : -> Edge [ctor] .
+ops source target : Edge -> Node .
+eq source(a1) = n1 .
+eq target(a1) = n2 .
+eq source(a2) = n3 .
+eq target(a2) = n1 .
+eq source(a3) = n2 .
+eq target(a3) = n3 .
+eq source(a4) = n3 .
+eq target(a4) = n4 .
+eq source(a5) = n4 .
+eq target(a5) = n2 .
+eq source(a6) = n5 .
+eq target(a6) = n6 .
+endfm
