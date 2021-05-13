@@ -1,0 +1,22 @@
+fmod QUEUES {X :: PAR} is
+sort Queue .
+op mtq : -> Queue [ctor] .
+op append : Queue X$Component -> Queue [ctor] .
+op remove _ : Queue -> Queue .
+op front _ : Queue ~> X$Component .
+op concat : Queue Queue -> Queue .
+op is mtq _ : Queue -> Bool .
+
+var q r : Queue .
+var c : X$Component .
+
+eq remove mtq = mtq .
+eq remove append (mtq, c) = mtq .
+ceq remove append (q, c) = append (remove q, c) if not (is mtq q) .
+eq front append (mtq, c) = c .
+ceq front append (q, c) = front q if not(is mtq q) .
+eq concat (q, mtq) = q .
+eq concat (q, r) = concat(append (q, front r), remove r) .
+eq is mtq mtq = true .
+eq is mtq append (q, c) = false .
+endfm

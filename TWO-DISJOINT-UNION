@@ -1,0 +1,5 @@
+fmod TWO-DISJOINT-UNION { X1 :: PAR, X2 :: PAR } is
+sort TwoDisjointUnion .
+op tag1_ : X1$Component -> TwoDisjointUnion [ctor] . 
+op tag2_ : X2$Component -> TwoDisjointUnion [ctor] . 
+endfm

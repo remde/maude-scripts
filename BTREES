@@ -1,0 +1,17 @@
+fmod BTREES{X :: LABEL} is
+sort Btree . op emptytree : -> Btree [ctor] . op make : Btree X$Label Btree -> Btree [ctor] .
+op is _ empty : Btree -> Bool .
+op left _ : Btree -> Btree .
+op right _ : Btree -> Btree . op data _ : Btree ~> X$Label . op is _ in _ : X$Label Btree -> Bool .
+vars l r : Btree . vars c c' : X$Label .
+eq is emptytree empty = true . 
+eq is make (l, c, r) empty = false . 
+eq left emptytree = emptytree . 
+eq left make(l, c, r) = l . 
+eq right emptytree = emptytree . 
+eq right make(l, c, r) = r . 
+eq data make(l, c, r) = c . 
+eq is c in emptytree = false . 
+ceq is c' in make (l, c, r) = true if c same c' . 
+ceq is c' in make (l, c, r) = is c' in l or is c' in r if not(c same c') . 
+endfm

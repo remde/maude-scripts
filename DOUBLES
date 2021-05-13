@@ -1,0 +1,10 @@
+fmod DOUBLES { X1 :: PAR, X2 :: PAR } is
+sort Double .
+op double : X1$Component X2$Component -> Double [ctor] .
+op first field of _ : Double -> X1$Component .
+op second field of _ : Double -> X2$Component .
+var c : X1$Component . 
+var c' : X2$Component .
+eq first field of double (c, c') = c .
+eq second field of double (c, c') = c' .
+endfm

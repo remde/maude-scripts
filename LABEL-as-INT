@@ -1,0 +1,5 @@
+view LABEL-as-INT
+from LABEL to INT is
+sort Label to Int .
+op _same_ to _==_ .
+endv

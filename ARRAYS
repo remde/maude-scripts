@@ -1,0 +1,17 @@
+fmod ARRAYS { X :: PAR } is
+protecting INT .
+sort Array { X } .
+op unit-array : X$Component -> Array { X } [ctor] .
+op _abutted`to_ : Array { X } Array { X } -> Array { X } [ assoc ctor] .
+op component_of_ : Int Array { X } ~> X$Component . 
+op size`of_ : Array { X } -> Int .
+var a : Array { X } . 
+var c : X$Component . 
+var i : Int .
+eq component 0 of unit-array (c) = c .
+eq component 0 of unit-array (c) abutted to a = c .
+ceq component i of unit-array (c) abutted to a = component (i - 1) of a 
+if i > 0 .
+eq size of unit-array(c) = 1 .
+eq size of (unit-array (c) abutted to a) = s (size of a) .
+endfm

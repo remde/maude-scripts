@@ -1,0 +1,12 @@
+fmod QUEUES-EXT { Z :: LABEL} is
+protecting QUEUES {PAR-as-LABEL}{Z} .
+protecting BTREES {Z} .
+op lcr_ : Btree -> Queue .
+op rlc_ : Btree -> Queue .
+vars l r : Btree .
+var c : Z$Label .
+eq lcr emptytree = mtq .
+eq lcr make (l, c, r) = concat(concat(lcr l, append(mtq, c)), lcr r) .
+eq rlc emptytree = mtq .
+eq rlc make (l, c, r) = append(concat(rlc r, rlc l), c) .
+endfm

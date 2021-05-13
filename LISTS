@@ -1,0 +1,32 @@
+fth PAR is
+sort Component .
+endfth
+
+view PAR-as-NAT
+from PAR to NAT is
+sort Component to Nat .
+endv
+
+fmod LISTS { X :: PAR } is
+protecting NAT .
+
+sort List . 
+
+op empty-list : -> List [ctor] . 
+op cons : X$Component List -> List [ctor] .
+op head of _ : List -> X$Component .
+op tail of _ : List -> List .
+op length of _ : List -> Nat .
+op is empty-list_ : List -> Bool .
+
+var c c' : X$Component . var l : List .
+
+eq head of cons(c, l) = c .
+eq tail of cons(c, l) = l .
+eq tail of empty-list = empty-list .
+eq length of empty-list = 0 .
+eq length of cons(c, l) = 1 + length of l .
+eq is empty-list empty-list = true . 
+eq is empty-list cons (c, l) = false . 
+
+endfm

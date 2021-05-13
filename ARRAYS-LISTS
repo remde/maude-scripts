@@ -1,0 +1,21 @@
+fmod ARRAYS' { X :: PAR } is
+	protecting INT .
+	protecting LISTS { X } .
+
+	sort List { X } .
+
+	op unit-array' : X$Component -> List { X } [ctor] .
+	op _abutted to'_ : List { X } List { X } -> List { X } [assoc ctor] .
+	op component'_of_ : Int List { X } ~> X$Component . 
+	op size of'_ : List { X } -> Int .
+
+	var a : List { X } . 
+	var c : X$Component . 
+	var i : Int .
+
+	eq component' 0 of unit-array' (c) = c .
+	eq component' 0 of unit-array' (c) abutted to' a = c .
+	ceq component' i of unit-array' (c) abutted to' a = component' (i - 1) of a if i > 0 .
+	eq size of' unit-array'(c) = 1 .
+	eq size of' (unit-array' (c) abutted to' a) = s (size of' a) .
+endfm

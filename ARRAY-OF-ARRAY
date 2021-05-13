@@ -1,0 +1,3 @@
+fmod ARRAY-OF-ARRAY{X:: PAR} is
+protecting ARRAYS{Array{X}}.
+endfm

@@ -1,0 +1,4 @@
+fmod INT-BTREES is
+protecting BTREES{LABEL-as-INT} .
+protecting QUEUES-EXT{LABEL-as-INT} .
+endfm

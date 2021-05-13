@@ -1,0 +1,5 @@
+fth LABEL is
+sort Label .
+protecting BOOL .
+op _same_ : Label Label -> Bool .
+endfth

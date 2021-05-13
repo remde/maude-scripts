@@ -1,3 +1,5 @@
 set protect BOOL off .
 load TRUTH-VALUES .
 load NATURALS .
+load LABEL .
+load BTREES .

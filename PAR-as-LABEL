@@ -1,0 +1,4 @@
+view PAR-as-LABEL
+from PAR to LABEL is
+sort Component to Label .
+endv
