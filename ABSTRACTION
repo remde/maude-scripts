@@ -1,0 +1,15 @@
+fmod ABSTRACTION { X :: PAR } is
+
+protecting LISTS { X } .
+protecting ARRAYS { X } .
+protecting ARRAYS' { X } .
+
+op phi _ : List -> Array .
+
+var c : X$Component .
+var al : List .
+
+eq phi cons(c, empty-list) = unit-array(c) .
+ceq phi al = unit-array(head of al) abutted to phi tail of al if size of' al > 1 .
+
+endfm

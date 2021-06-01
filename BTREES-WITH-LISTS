@@ -1,0 +1,83 @@
+fth PAR is
+	sort Component .
+endfth
+
+view PAR-as-NAT
+	from PAR to NAT is
+	sort Component to Nat .
+endv
+
+*** LISTAS
+fmod LISTS { X :: PAR } is
+	protecting NAT .
+
+	sort List .
+
+	op empty-list : -> List [ctor] .
+	op cons : X$Component List -> List [ctor] .
+	op head of _ : List -> X$Component .
+	op tail of _ : List -> List .
+	op length of _ : List -> Nat .
+	op is empty-list_ : List -> Bool .
+
+	var c c' : X$Component . 
+	var l : List .
+
+	eq head of cons(c, l) = c .
+	eq tail of cons(c, l) = l .
+	eq tail of empty-list = empty-list .
+	eq length of empty-list = 0 .
+	eq length of cons(c, l) = 1 + length of l .
+	eq is empty-list empty-list = true .
+	eq is empty-list cons (c, l) = false .
+endfm
+
+*** BTREES A PARTIR DE LISTAS
+fmod BTREES' {X :: PAR} is
+
+        protecting LISTS {X} .
+
+        sort List {X} .
+
+        op emptytree' : -> List [ctor] .
+        op make' : List X$Component List -> List [ctor] .
+        op is' _ empty : List -> Bool .
+        op left' _ : List -> List .
+        op right' _ : List -> List .
+        op data' _ : List ~> X$Component .
+        op is _ in' _ : X$Component List -> Bool .
+
+        vars l1 l1' l2 l2' : List .
+        vars c1 c1' c2 c2' : X$Component .
+
+        eq is' emptytree' empty = true .
+        eq is' make' (l1, c1, l2) empty = false .
+        eq left' emptytree' = emptytree' .
+        eq left' make'(l1, c1, l2) = l1 .
+        eq right' emptytree' = emptytree' .
+        eq right' make'(l1, c1, l2) = l2 .
+        eq data' make'(l1, c1, l2) = c1 .
+        eq is c1 in' emptytree' = false .
+        ceq is c1' in' make' (l1, c1, l2) = true if c1 == c1' .
+        ceq is c1' in' make' (l1, c1, l2) = is c1' in' l1 or is c1' in' l2 if not(c1 == c1') .
+endfm
+
+*** TESTES
+
+red emptytree' .
+***Resultado: result List: emptytree'
+
+red is' emptytree' empty .
+***Resultado: result Boolean: true
+
+red left' make'(l1, c1, l2) .
+***Resultado: result List: l1
+
+red make'(emptytree', c1, emptytree') .
+***Resultado: result List: make'(emptytree', c1, emptytree')
+
+red make'(make'(make'(emptytree', c2', emptytree'), c2, emptytree'), c1, make'(emptytree', c1', make'(emptytree', c2', emptytree'))) .
+***Resultado: result List: make'(make'(make'(emptytree', c2', emptytree'), c2, emptytree'), c1, make'(emptytree', c1', make'(emptytree', c2', emptytree')))
+ 
+red is c1' in' make' (l1, c1, l2) .
+***Resultado: result Bool: is c1' in' l1 and is c1' in' l2 xor is c1' in' l1 xor is c1' in' l2

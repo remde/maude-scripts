@@ -1,0 +1,31 @@
+fmod BTREES' {X :: PAR} is
+
+	protecting LISTS {X} .
+
+	sort List {X} .
+
+	op emptytree' : -> List [ctor] . 
+	op make' : List X$Component List -> List [ctor] .
+	op is' _ empty : List -> Bool .
+	op left' _ : List -> List .
+	op right' _ : List -> List . 
+	op data' _ : List ~> X$Component . 
+	op is _ in' _ : X$Component List -> Bool .
+
+	vars l1 l1' l2 l2' : List . 
+	vars c1 c1' c2 c2' : X$Component .
+
+	eq is' emptytree' empty = true . 
+	eq is' make' (l1, c1, l2) empty = false . 
+	eq left' emptytree' = emptytree' . 
+	eq left' make'(l1, c1, l2) = l1 . 
+	eq right' emptytree' = emptytree' . 
+	eq right' make'(l1, c1, l2) = l2 . 
+	eq data' make'(l1, c1, l2) = c1 . 
+	eq is c1 in' emptytree' = false . 
+	ceq is c1' in' make' (l1, c1, l2) = true if c1 == c1' . 
+	ceq is c1' in' make' (l1, c1, l2) = is c1' in' l1 or is c1' in' l2 if not(c1 == c1') . 
+endfm
+red emptytree' .
+red make'(emptytree', c1, emptytree') .
+red make'(make'(make'(emptytree', c2', emptytree'), c2, emptytree'), c1, make'(emptytree', c1', make'(emptytree', c2', emptytree'))) .
